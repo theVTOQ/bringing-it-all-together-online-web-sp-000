@@ -61,13 +61,13 @@ class Dog
     self.new(name: result[1], breed: result[2], id: result[0])
   end
 
-  def self.find_or_create_by(name:, breed:)
+  def self.find_or_create_by(args)
     sql = <<-SQL
       SELECT * FROM dogs
       WHERE name = ? AND breed = ?;
     SQL
     DB[:conn].execute(sql)
-    matches = DB[:conn].execute(sql, name, breed)
+    matches = DB[:conn].execute(sql, args[:name], args[:breed])
 
     if matches.empty?
       self.create(name, breed)
