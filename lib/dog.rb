@@ -70,7 +70,7 @@ class Dog
     matches = DB[:conn].execute(sql, args[:name], args[:breed])
 
     if matches.empty?
-      self.create(name, breed)
+      self.create(args[:name], args[:breed])
     else
       match = matches[0]
       id = match[0]
